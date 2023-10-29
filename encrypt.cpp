@@ -6,10 +6,19 @@
 #include <bitset>
 #include <string>
 #include <cmath>
+#include <vector>
+
 
 #include "structures.h"
 
 using namespace std;
+
+
+
+
+
+
+
 
 void printState (unsigned char * state){
     for (int i = 0; i < 16; i++) {
@@ -120,6 +129,13 @@ void FinalRound (unsigned char * state , unsigned char*** TboxTable){
 }
 
 
+// Bijective function using Galois field
+unsigned char bijectiveFunction(unsigned char x) {
+    return x ^ 0x04;
+}
+
+
+
 /* The AES encryption function
  * Organizes the confusion and diffusion steps into one function
  */
@@ -130,7 +146,8 @@ void AESEncrypt(unsigned char * message, unsigned char * expandedKey, unsigned c
     unsigned char *** Ty_Table=Tytable();
     unsigned char *** Tbox_final = TboxFinalGenerator(expandedKey + (16 * 9));
 	unsigned char state[16];
-
+	unsigned char temp[16];
+    unsigned char xtemp[16];
 
 	for (int i = 0; i < 16; i++) {
 		state[i] = message[i];
@@ -145,11 +162,32 @@ void AESEncrypt(unsigned char * message, unsigned char * expandedKey, unsigned c
 
 	for (int i = 0; i < numberOfRounds; i++) {
 
+
+
         cout << "----------------------Round NO: " << i << " ----------------------" << "\n" ;
+        if (i>0){
+            for (int i = 0; i < 16; i++) {
+
+                state[i]= bijectiveFunction(state[i]) ;
+            }
+            cout << "Inversing : " ;
+            printState(state);
+        }
+
+        cout << "Starting state of this round: ";
+        printState(state);
 		Round(state, expandedKey + (16 * i),Tbox_round,i,Ty_Table,xorTable);
 
-		cout << "State after round "<<i<< ": "  ;
+        cout<< "Before bijecting: ";
         printState(state);
+        for (int i = 0; i < 16; i++) {
+
+            state[i]= bijectiveFunction(state[i]) ;
+        }
+
+        cout<< "After bijecting: ";
+        printState(state);
+
 
 
 
@@ -157,7 +195,16 @@ void AESEncrypt(unsigned char * message, unsigned char * expandedKey, unsigned c
 
 	cout << "----------------------Final Round----------------------"<< "\n" ;
 
+
+    for (int i = 0; i < 16; i++) {
+        state[i]= bijectiveFunction(state[i]) ;
+    }
+	cout<< "Inversing function: ";
+	printState(state);
+
     FinalRound(state,Tbox_final);
+
+
 
 
 
