@@ -1,7 +1,6 @@
 # 128-bit AES
 
 ## Synopsis
-Encryption and decryption programs written in C++ to improve my understanding of the 128-bit AES cipher.
 
 ## File Details
 - encrypt.cpp - Source file for encryption utility. 
