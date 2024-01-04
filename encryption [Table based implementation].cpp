@@ -53,12 +53,7 @@ void finalRound(unsigned char *state, unsigned char ***TboxTable, ofstream &insp
 }
 
 void AESEncrypt(unsigned char *message, unsigned char *expandedKey, unsigned char *encryptedMessage, ofstream &inspectionFile) {
-    // Initialize T-box tables and XOR table
-    unsigned char ***Tbox_round = TboxRound(expandedKey);
-    unsigned char **xorTable = generateXorTable();
-    unsigned char ***Ty_Table = Tytable();
-    unsigned char ***Tbox_final = TboxFinalGenerator(expandedKey + (16 * 9));
-
+    
     unsigned char state[16];
 
     // Copy input message to the state array
