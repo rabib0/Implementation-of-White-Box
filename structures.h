@@ -324,7 +324,11 @@ void ShiftKeys(unsigned char * key) {
 }
 
 unsigned char* expandedKey=KeyExpansion(key);
-
+// Initialize T-box tables and XOR table
+unsigned char ***Tbox_round = TboxRound(expandedKey);
+unsigned char **xorTable = generateXorTable();
+unsigned char ***Ty_Table = Tytable();
+unsigned char ***Tbox_final = TboxFinalGenerator(expandedKey + (16 * 9));
 
 
 #endif /* STRUCTURES_H */
