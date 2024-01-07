@@ -26,7 +26,15 @@ White-box cryptography involves securing cryptographic algorithms and keys even 
 
 ### 5. `encryptConfusingRound.cpp`
 
-*Note: Proper inclusion and utilization of these source files within your AES project are crucial for a comprehensive and optimized implementation.*
+`encryptConfusingRound.cpp` enhances the AES implementation with complex rounds, considering security measures. It uses functionalities from header files like `encoding.h`, `table.h`, and possibly other header files for comprehensive encryption.
+
+## Header Files
+
+In addition to the mentioned source files, the implementation may depend on various header files:
+
+- `table.h`: Contains lookup tables (TBox, TyiTable, XorTable) for optimized encryption.
+- `encoding.h`: Provides additional encoding functions for enhanced security.
+- Other relevant header files that contribute to the functionality and security of the encryption process.
 
 ## Compilation and Output
 
