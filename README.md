@@ -1,4 +1,4 @@
-# White-Box Cryptography Implementation
+# Whitebox Cryptography Implementation
 
 White-box cryptography involves securing cryptographic algorithms and keys even when the internal details are fully exposed to potential attackers. This implementation focuses on the importance of white-box cryptography in untrusted environments, resistance to reverse engineering, and application security.
 
